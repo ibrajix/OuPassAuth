@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.our_pass_auth">
    <application
-        android:label="our_pass_auth"
+        android:label="OurPass Auth"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

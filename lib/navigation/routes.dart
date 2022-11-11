@@ -21,6 +21,11 @@ abstract class Routes {
           path: Destination.loginPath,
           builder: (context, state) => const Login()
       )
-    ]
+    ],
+    errorBuilder: (context, state) => Scaffold(
+      appBar: AppBar(
+        title: const Text(Strings.error404),
+      ),
+    )
   );
 }
