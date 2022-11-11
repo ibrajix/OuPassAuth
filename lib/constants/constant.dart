@@ -1,5 +1,6 @@
 abstract class Destination {
-  static const homePath = '/';
+  static const loginRegisterPath = '/';
+  static const homePath = '/home';
   static const loginPath = '/login';
   static const registerPath = '/register';
 }

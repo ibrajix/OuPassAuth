@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
