@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_pass_auth/core/start.dart';
 import 'package:our_pass_auth/repository/AuthRepository.dart';
-import 'package:our_pass_auth/view/login_register.dart';
+import 'package:our_pass_auth/view/screens/login_register.dart';
 
 import '../blocs/app/app_bloc.dart';
 import '../navigation/routes.dart';

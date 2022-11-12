@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:our_pass_auth/theme/colors.dart';
-import 'package:our_pass_auth/view/home.dart';
-import 'package:our_pass_auth/view/login.dart';
+import 'package:our_pass_auth/view/screens/home.dart';
+import 'package:our_pass_auth/view/screens/login.dart';
+import 'package:our_pass_auth/view/screens/register.dart';
 
-import '../constants/constant.dart';
+import '../../constants/constant.dart';
 
 class LoginRegister extends StatelessWidget {
 
@@ -68,7 +69,7 @@ class LoginRegister extends StatelessWidget {
             const SizedBox(height: 20),
             OutlinedButton(
               onPressed: () {
-                Navigator.of(context).push(Login.route());
+                Navigator.of(context).push(Register.route());
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(250, 45),

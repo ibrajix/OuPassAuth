@@ -19,7 +19,18 @@ class AuthRepository {
     });
   }
 
-  Future<void> loginWithEmailAndPassword({
+  Future<void> loginWithCredentials({
+    required String email,
+    required String password
+  }) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    } catch(_){
+      //log errors
+    }
+  }
+
+  Future<void> register({
     required String email,
     required String password,
   }) async {

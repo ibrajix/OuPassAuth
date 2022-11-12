@@ -23,6 +23,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) {
     on<AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
+
+    _streamSubscription = _authRepository.user.listen((user){
+      add(AppUserChanged(user));
+    });
+
   }
 
   void _onUserChanged(AppUserChanged event, Emitter<AppState> emitter){
@@ -33,6 +38,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     unawaited(_authRepository.logout());
   }
 
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
+  }
 
 
 }

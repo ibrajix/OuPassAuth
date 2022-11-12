@@ -17,6 +17,8 @@ dependencies:
   firebase_auth: ^4.1.2
   flutter_native_splash: ^2.2.9
   flow_builder: ^0.0.9
+  local_auth: ^2.1.2
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:

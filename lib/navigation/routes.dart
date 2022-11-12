@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:our_pass_auth/blocs/app/app_bloc.dart';
-import 'package:our_pass_auth/view/home.dart';
-import 'package:our_pass_auth/view/login_register.dart';
+import 'package:our_pass_auth/view/screens/home.dart';
+import 'package:our_pass_auth/view/screens/login_register.dart';
 
 List<Page>  onGenerateAppViewPages(
     AppStatus state,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:our_pass_auth/blocs/app/app_bloc.dart';
 
-import '../constants/constant.dart';
+import '../../constants/constant.dart';
 
 class Home extends StatelessWidget {
 
@@ -10,6 +12,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -26,14 +31,25 @@ class Home extends StatelessWidget {
         height: double.maxFinite,
         width: double.maxFinite,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
              Container(
                margin: const EdgeInsets.only(top: 30),
                child: Image.asset(
                  Images.appLogo,
-               )
-             )
+               ),
+             ),
+            const SizedBox(height: 50),
+            const Text(Strings.welcomeBoss),
+            const SizedBox(height: 40),
+            Text(user.email ?? ""),
+            TextButton(
+                onPressed: () {
+                  context.read<AppBloc>().add(
+                    AppLogoutRequested()
+                  );
+                },
+                child: const Text(Strings.logout))
           ],
         ),
       ),
