@@ -1,16 +1,25 @@
-# our_pass_auth
+# Our Pass Auth
 
-A new Flutter project.
 
-## Getting Started
+## Screenshot
 
-This project is a starting point for a Flutter application.
+<p>
+    <img src="https://user-images.githubusercontent.com/39574228/201544646-534ccb66-c7ab-4b71-bcb8-cec6889172b7.jpg" width="200px" hspace="10"/>
+    <img src="https://user-images.githubusercontent.com/39574228/201544660-db8fac2e-1416-408a-8ff3-5553f1a8429c.jpg" width="200px" hspace="10"/>
+    <img src="https://user-images.githubusercontent.com/39574228/201544681-f9ff48ae-bf75-4181-806c-3d88e036bed3.jpg" width="200px" hspace="10"/>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter (Dart)
+- State Management (Bloc, Cubit, Provider)
+- Firebase Auth
+- Secure Storage
+- SharedPreference
+- Model -> Repository -> State Management -> View  
+- Biometrics Auth (Not supported by firebase --> Hack!)
+
+## Download (APK)
+
+<a href="https://github.com/ibrajix/OuPassAuth/releases/download/v1.0/our-pass-auth.apk">Click to download</a>
