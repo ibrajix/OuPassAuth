@@ -13,7 +13,7 @@ class Start extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightThemeData,
-      home: FlowBuilder(
+      home: FlowBuilder<AppStatus>(
           state: context.select((AppBloc bloc) => bloc.state.status),
           onGeneratePages: onGenerateAppViewPages
       ),

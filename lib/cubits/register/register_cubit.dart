@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'package:our_pass_auth/view/screens/register.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../repository/auth_repository.dart';
 
@@ -11,7 +10,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   final AuthRepository _authRepository;
   RegisterCubit(this._authRepository) : super(RegisterState.initial());
-
+  
   void emailChanged(String value) {
     emit(state.copyWith(email: value, status: RegisterStatus.initial));
   }
@@ -21,14 +20,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future registerWithCredentials() async {
-    if(state.status == RegisterStatus.loading) return;
     emit(state.copyWith(status: RegisterStatus.loading));
     try{
       await _authRepository.register(email: state.email, password: state.password);
       emit(state.copyWith(status: RegisterStatus.success));
-    } catch (e){
+    }catch (e) {
       //catch errors
-
+      emit(state.copyWith(status: RegisterStatus.error));
     }
   }
 

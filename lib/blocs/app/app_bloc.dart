@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../model/user.dart';
@@ -24,17 +24,24 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
 
-    _streamSubscription = _authRepository.user.listen((user){
-      add(AppUserChanged(user));
-    });
-
+    _streamSubscription = _authRepository.user.listen(
+            (user) => add(AppUserChanged(user))
+    );
   }
 
-  void _onUserChanged(AppUserChanged event, Emitter<AppState> emitter){
-    emit(event.user.isNotEmpty ? AppState.authenticated(event.user) : const AppState.unauthenticated());
+  void _onUserChanged(
+      AppUserChanged event,
+      Emitter<AppState> emit)
+  {
+    emit(event.user.isNotEmpty ? AppState.authenticated(event.user)
+        : const AppState.unauthenticated()
+    );
   }
 
-  void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emitter){
+  void _onLogoutRequested(
+      AppLogoutRequested event,
+      Emitter<AppState> emit)
+  {
     unawaited(_authRepository.logout());
   }
 
@@ -43,6 +50,5 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     _streamSubscription?.cancel();
     return super.close();
   }
-
 
 }

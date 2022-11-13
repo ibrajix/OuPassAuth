@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_pass_auth/constants/constant.dart';
 import 'package:our_pass_auth/cubits/login/login_cubit.dart';
 import 'package:our_pass_auth/cubits/register/register_cubit.dart';
+import 'package:our_pass_auth/utils/show_snackbar.dart';
 import 'package:our_pass_auth/view/screens/home.dart';
 import 'package:our_pass_auth/view/screens/login.dart';
 
@@ -17,7 +18,8 @@ class AuthFormRegister extends StatelessWidget {
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if(state.status == RegisterStatus.error){
-          //handle error
+          //I am showing a generic error message here --> Will do proper error handling later
+          Utility.showSnackBar(context, Strings.genericErrorMessage);
         }
       },
       child: Column(
@@ -53,7 +55,8 @@ class AuthFormLogin extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if(state.status == LoginStatus.error){
-          //handle error
+          //I am showing a generic error message here --> Will do proper error handling later
+          Utility.showSnackBar(context, Strings.genericErrorMessage);
         }
       },
       child: Column(

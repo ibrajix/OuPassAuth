@@ -6,13 +6,21 @@ import 'package:our_pass_auth/core/storage/local_preference.dart';
 import 'package:our_pass_auth/firebase_options.dart';
 import 'package:our_pass_auth/repository/auth_repository.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-  await LocalPreference.init();
-  final authRepository = AuthRepository();
-  /*Bloc.observer = AppBlocObserver();*/
-  runApp(OurPassAuthApp(authRepository: authRepository));
+import 'blocs/app/app_bloc_observer.dart';
+
+Future<void> main() {
+
+  return BlocOverrides.runZoned(
+      () async {
+        WidgetsFlutterBinding.ensureInitialized();
+        await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+        await LocalPreference.init();
+        final authRepository = AuthRepository();
+        runApp(OurPassAuthApp(authRepository: authRepository));
+      },
+    blocObserver: AppBlocObserver()
+  );
+
 
 }
 

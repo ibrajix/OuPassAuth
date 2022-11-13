@@ -5,7 +5,7 @@ import 'package:our_pass_auth/view/screens/home.dart';
 import 'package:our_pass_auth/view/screens/login_register.dart';
 import 'package:our_pass_auth/view/screens/verify_email.dart';
 
-List<Page>  onGenerateAppViewPages(
+List<Page> onGenerateAppViewPages(
     AppStatus state,
     List<Page<dynamic>> pages,
 ){

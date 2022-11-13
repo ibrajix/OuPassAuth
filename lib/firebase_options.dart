@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-/// Please not, as per firebase docs --> This file is OKAY to include in version control
+/// DON'T PANIC, as per firebase docs --> This file is OKAY to include in version control
 /// https://firebase.google.com/docs/projects/api-keys#api-keys-for-firebase-are-different
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {

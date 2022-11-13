@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter/cupertino.dart';
 import 'package:our_pass_auth/model/user.dart';
+import 'package:our_pass_auth/utils/error_handler.dart';
 
 class AuthRepository {
+
+  ErrorHandler? _errorHandler;
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
@@ -12,7 +16,9 @@ class AuthRepository {
   var currentUser = User.empty;
 
   Stream<User> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser) {
+    return _firebaseAuth
+        .authStateChanges()
+        .map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
       currentUser = user;
       return user;
@@ -23,29 +29,21 @@ class AuthRepository {
     required String email,
     required String password
   }) async {
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-    } catch(_){
-      //log errors
-    }
+     await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   Future<void> register({
     required String email,
     required String password,
   }) async {
-     try {
-       await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-     } catch(_) {
-       //catch error store in firebase analytics or somewhere else
-     }
+    await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
    }
 
   Future<void> logout() async{
     try {
       await Future.wait([_firebaseAuth.signOut()]);
-    }catch(_){
-
+    }catch(e){
+      _errorHandler?.onError(e.toString());
     }
   }
 }

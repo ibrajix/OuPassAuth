@@ -86,13 +86,7 @@ class LoginButton extends StatelessWidget {
         ElevatedButton(
             onPressed: () async{
               context.read<LoginCubit>().loginWithCredentials();
-              /*if(state.status == LoginStatus.success){
-                await _secureStorage.setEmail(state.email);
-                await _secureStorage.setPassword(state.password);
-                await _secureStorage.setIsFirstTimeLogin(Strings.isFirstTimeFalse);
-                if (!mounted) return;
-                Navigator.of(context).push(Home.route());
-              }*/
+              FocusManager.instance.primaryFocus?.unfocus();
             },
             style: ElevatedButton.styleFrom(
               primary: AppColors.mainColor,
@@ -125,6 +119,7 @@ class RegisterButton extends StatelessWidget {
             onPressed: () async{
               context.read<RegisterCubit>().registerWithCredentials();
               await _secureStorage.setEmail(state.email);
+              FocusManager.instance.primaryFocus?.unfocus();
             },
             style: ElevatedButton.styleFrom(
               primary: AppColors.mainColor,

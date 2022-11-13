@@ -32,5 +32,5 @@ abstract class  Strings {
 
   //error messages
   static const biometricsFailed = "For some weird reason this isn't working yet. Firebase does not support biometric signup, so I am trying to use a hack. Will fix";
-
+  static const genericErrorMessage = "Something went wrong, try again";
 }
