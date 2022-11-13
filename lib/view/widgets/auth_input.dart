@@ -72,9 +72,7 @@ class PasswordInputRegister extends StatelessWidget {
 
 class LoginButton extends StatelessWidget {
 
-  LoginButton({Key? key}) : super(key: key);
-
-  final StorageService _secureStorage = StorageService();
+  const LoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, [bool mounted = true]) {

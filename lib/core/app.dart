@@ -9,14 +9,14 @@ import '../navigation/routes.dart';
 
 class OurPassAuthApp extends StatelessWidget {
 
-  final AuthRepository _authRepository;
-
   const OurPassAuthApp({
     Key? key,
     required AuthRepository authRepository
   })
       : _authRepository = authRepository,
         super(key: key);
+
+  final AuthRepository _authRepository;
 
   @override
   Widget build(BuildContext context) {

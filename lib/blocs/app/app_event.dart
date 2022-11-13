@@ -11,6 +11,8 @@ class AppEvent extends Equatable {
 
 class AppLogoutRequested extends AppEvent {}
 
+class SignInUser extends AppEvent {}
+
 class AppUserChanged extends AppEvent {
   final User user;
   const AppUserChanged(this.user);

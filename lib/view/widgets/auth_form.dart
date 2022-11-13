@@ -4,8 +4,6 @@ import 'package:our_pass_auth/constants/constant.dart';
 import 'package:our_pass_auth/cubits/login/login_cubit.dart';
 import 'package:our_pass_auth/cubits/register/register_cubit.dart';
 import 'package:our_pass_auth/utils/show_snackbar.dart';
-import 'package:our_pass_auth/view/screens/home.dart';
-import 'package:our_pass_auth/view/screens/login.dart';
 
 import 'auth_input.dart';
 
@@ -17,8 +15,11 @@ class AuthFormRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        if(state.status == RegisterStatus.error){
-          //I am showing a generic error message here --> Will do proper error handling later
+        if(state.status == RegisterStatus.success){
+          Navigator.of(context).pop();
+        }
+        else if(state.status == RegisterStatus.error){
+          //I am showing a generic error message here --> Will do proper error handling later --> Things choke for my head!
           Utility.showSnackBar(context, Strings.genericErrorMessage);
         }
       },
@@ -54,26 +55,29 @@ class AuthFormLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        if(state.status == LoginStatus.error){
-          //I am showing a generic error message here --> Will do proper error handling later
+        if(state.status == LoginStatus.success){
+          Navigator.of(context).pop();
+        }
+        else if(state.status == LoginStatus.error){
+          //I am showing a generic error message here --> Will do proper error handling later --> Things choke for my head!
           Utility.showSnackBar(context, Strings.genericErrorMessage);
         }
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children:  [
-          const Text(
+        children:  const [
+          Text(
             Strings.welcomeBack,
             style: TextStyle(
                 fontSize: 20
             ),
           ),
-          const SizedBox(height: 50),
-          const EmailInputLogin(),
-          const SizedBox(height: 20),
-          const PasswordInputLogin(),
-          const SizedBox(height: 10),
+          SizedBox(height: 50),
+          EmailInputLogin(),
+          SizedBox(height: 20),
+          PasswordInputLogin(),
+          SizedBox(height: 10),
           LoginButton()
         ],
       ),
