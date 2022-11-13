@@ -5,7 +5,7 @@ import 'package:our_pass_auth/constants/constant.dart';
 import 'package:our_pass_auth/cubits/register/register_cubit.dart';
 
 import '../../cubits/login/login_cubit.dart';
-import '../../repository/AuthRepository.dart';
+import '../../repository/auth_repository.dart';
 import '../widgets/auth_form.dart';
 
 class Register extends StatelessWidget {
@@ -34,7 +34,7 @@ class Register extends StatelessWidget {
         padding: const EdgeInsets.all(50),
         child: BlocProvider(
           create: (_) => RegisterCubit(context.read<AuthRepository>()),
-          child: const AuthForm(fromAuth: Strings.register),
+          child: const AuthFormRegister(),
         ),
       ),
     );

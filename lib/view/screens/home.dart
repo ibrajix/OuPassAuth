@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:our_pass_auth/blocs/app/app_bloc.dart';
 
+import '../../blocs/app/app_bloc.dart';
 import '../../constants/constant.dart';
+import '../../core/storage/local_preference.dart';
+import '../../theme/colors.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
 
   const Home({Key? key}) : super(key: key);
   static Page page() => const MaterialPage(child: Home());
+
+  static Route route() {
+    return MaterialPageRoute(builder: (_) => const Home());
+  }
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  bool isSwitched = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,34 +45,65 @@ class Home extends StatelessWidget {
           statusBarBrightness: Brightness.light,
         ),
       ),
-      body: Container(
-        margin: const EdgeInsets.only(top: 50, left: 30, right: 30, bottom: 20),
-        height: double.maxFinite,
-        width: double.maxFinite,
+      body: SizedBox(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-             Container(
-               margin: const EdgeInsets.only(top: 30),
-               child: Image.asset(
-                 Images.appLogo,
-               ),
-             ),
-            const SizedBox(height: 50),
-            const Text(Strings.welcomeBoss),
-            const SizedBox(height: 40),
-            Text(user.email ?? ""),
+            Container(margin: const EdgeInsets.only(top: 30),),
+            const Text(
+              Strings.welcomeBoss,
+              style: TextStyle(
+                  fontSize: 30
+              ),
+            ),
+            Text(
+              user.email ?? "",
+              style: const TextStyle(
+                  fontSize: 20
+              ),
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                    Strings.useBiometricsQ
+                ),
+                SizedBox(
+                  child:  Padding(
+                      padding: const EdgeInsets.all(13),
+                      child: Switch(
+                        value: LocalPreference.getCanUseBiometrics() ?? false,
+                        onChanged: (value) {
+                          setState(() {
+                            isSwitched = value;
+                            LocalPreference.setCanUseBiometrics(value);
+                          });
+                        },
+                        activeTrackColor: AppColors.mainColor,
+                        activeColor: AppColors.mainColor,
+                      ),
+                  ),
+                ),
+              ],
+            ),
             TextButton(
                 onPressed: () {
                   context.read<AppBloc>().add(
-                    AppLogoutRequested()
+                      AppLogoutRequested()
                   );
                 },
-                child: const Text(Strings.logout))
+                child: const Text(
+                  Strings.logout,
+                  style: TextStyle(
+                      fontSize: 20
+                  ),
+                )
+            )
           ],
         ),
       ),
     );
   }
 }
-

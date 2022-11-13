@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_pass_auth/core/start.dart';
-import 'package:our_pass_auth/repository/AuthRepository.dart';
+import 'package:our_pass_auth/repository/auth_repository.dart';
 import 'package:our_pass_auth/view/screens/login_register.dart';
 
 import '../blocs/app/app_bloc.dart';

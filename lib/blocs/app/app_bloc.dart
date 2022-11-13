@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../model/user.dart';
-import '../../repository/AuthRepository.dart';
+import '../../repository/auth_repository.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -20,7 +20,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         super(
         authRepository.currentUser.isNotEmpty
             ? AppState.authenticated(authRepository.currentUser) : const AppState.unauthenticated(),
-  ) {
+      ) {
     on<AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
 

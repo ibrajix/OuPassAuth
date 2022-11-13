@@ -1,12 +1,15 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:our_pass_auth/core/storage/local_preference.dart';
 import 'package:our_pass_auth/core/storage/storage_service.dart';
 import 'package:our_pass_auth/cubits/login/login_cubit.dart';
-import 'package:our_pass_auth/repository/AuthRepository.dart';
+import 'package:our_pass_auth/repository/auth_repository.dart';
+import 'package:our_pass_auth/view/widgets/auth_form.dart';
 import 'package:our_pass_auth/view/widgets/show_biometrics.dart';
 
-import '../../constants/constant.dart';
 
 class Login extends StatefulWidget {
 
@@ -23,25 +26,24 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
 
   final StorageService storageService = StorageService();
-  String? _savedSecureEmail = "";
-  String? _savedSecurePassword = "";
-  String? _checkFirstTimeLogin = Strings.isFirstTimeFalse;
+  bool? _checkBiometricsEnabled;
 
   @override
   void initState() {
     super.initState();
-    fetchSecuredStorageData();
+    checkBiometricsEnabled();
   }
 
-  Future<void> fetchSecuredStorageData() async {
-    _savedSecureEmail = await storageService.getEmail();
-    _savedSecurePassword = await storageService.getPassword();
-    _checkFirstTimeLogin = await storageService.getIsFirstTimeLogin();
+  void checkBiometricsEnabled() {
+    setState(() {
+      _checkBiometricsEnabled = LocalPreference.getCanUseBiometrics();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
         toolbarHeight: 0,
         backgroundColor: Colors.transparent,
@@ -57,10 +59,10 @@ class _LoginState extends State<Login> {
         child: BlocProvider(
           create: (_) => LoginCubit(context.read<AuthRepository>()),
           child: Column(
-            children: [
+            children:  [
               const SizedBox(height: 50),
-              if(_checkFirstTimeLogin == Strings.isFirstTimeFalse)
-                  const ShowBioMetrics()
+              const AuthFormLogin(),
+              _checkBiometricsEnabled == true ? ShowBiometrics() : const SizedBox(height: 10)
             ],
           ),
         ),
