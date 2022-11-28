@@ -22,10 +22,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future registerWithCredentials() async {
     emit(state.copyWith(status: RegisterStatus.loading));
     try{
-      await _authRepository.register(email: state.email, password: state.password).then((value) => emit(state.copyWith(status: RegisterStatus.success)));
+      await _authRepository.register(email: state.email, password: state.password).then((value) =>
+          emit(state.copyWith(status: RegisterStatus.success)
+          ));
     }catch (e) {
       //catch errors
-      emit(state.copyWith(status: RegisterStatus.error));
+      emit(state.copyWith(
+          status: RegisterStatus.error,
+          errorMessage: e.toString()
+      ));
     }
   }
 

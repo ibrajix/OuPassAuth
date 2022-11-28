@@ -19,8 +19,8 @@ class AuthFormRegister extends StatelessWidget {
           Navigator.of(context).pop();
         }
         else if(state.status == RegisterStatus.error){
-          //I am showing a generic error message here --> Will do proper error handling later --> Things choke for my head!
-          Utility.showSnackBar(context, Strings.genericErrorMessage);
+          //show error message
+          Utility.showSnackBar(context, state.errorMessage ?? Strings.genericErrorMessage);
         }
       },
       child: Column(
@@ -59,8 +59,8 @@ class AuthFormLogin extends StatelessWidget {
           Navigator.of(context).pop();
         }
         else if(state.status == LoginStatus.error){
-          //I am showing a generic error message here --> Will do proper error handling later --> Things choke for my head!
-          Utility.showSnackBar(context, Strings.genericErrorMessage);
+          //show error here
+          Utility.showSnackBar(context, state.errorMessage ?? Strings.genericErrorMessage);
         }
       },
       child: Column(

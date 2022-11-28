@@ -29,7 +29,11 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(status: LoginStatus.success));
     } on FirebaseAuthException catch  (e){
       //catch errors
-      emit(state.copyWith(status: LoginStatus.error));
+      emit(state.copyWith(
+          status: LoginStatus.error,
+          errorMessage: e.toString()
+        )
+      );
     }
   }
 
@@ -40,8 +44,13 @@ class LoginCubit extends Cubit<LoginState> {
     try{
       await _authRepository.loginWithCredentials(email: email?? "", password: password?? "");
       emit(state.copyWith(status: LoginStatus.success));
-    } catch (_){
+    } catch (e){
       //catch errors
+      emit(state.copyWith(
+         status: LoginStatus.error,
+         errorMessage: e.toString()
+       )
+      );
     }
   }
 
