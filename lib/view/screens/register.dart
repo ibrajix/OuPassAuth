@@ -34,7 +34,7 @@ class Register extends StatelessWidget {
         padding: const EdgeInsets.all(50),
         child: BlocProvider(
           create: (_) => RegisterCubit(context.read<AuthRepository>()),
-          child: const AuthFormRegister(),
+          child:  AuthFormRegister(),
         ),
       ),
     );

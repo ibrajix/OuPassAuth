@@ -49,13 +49,11 @@ class _ShowBiometricsState extends State<ShowBiometrics> {
                 bool isAuthenticated = await Authentication.authenticateWithBiometrics();
                 if (isAuthenticated) {
                   //pass the saved email and password to firebase and log user in
-                  //for some weird reason, this is returning an empty string 🤔
                   //ideally, the saved email and password in secure storage is to be used to login the user with firebase
-                  debugPrint('movieTitle: $_savedSecureEmail');
-                  /*context.read<LoginCubit>().loginWithCredentialsBio(_savedSecureEmail, _savedSecurePassword);*/
+                  debugPrint('checkEmail: $_savedSecureEmail');
                   //show a snackBar until I fix this
                   if (!mounted) return;
-                  Utility.showSnackBar(context, Strings.biometricsFailed);
+                  context.read<LoginCubit>().loginWithCredentialsBio(_savedSecureEmail, _savedSecurePassword);
                 }
               },
               child: Image.asset(

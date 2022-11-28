@@ -5,17 +5,23 @@ import 'package:our_pass_auth/cubits/login/login_cubit.dart';
 import 'package:our_pass_auth/cubits/register/register_cubit.dart';
 import 'package:our_pass_auth/utils/show_snackbar.dart';
 
+import '../../core/storage/storage_service.dart';
 import 'auth_input.dart';
 
 class AuthFormRegister extends StatelessWidget {
 
-  const AuthFormRegister({Key? key}) : super(key: key);
+  AuthFormRegister({Key? key}) : super(key: key);
+
+  final StorageService storageService = StorageService();
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if(state.status == RegisterStatus.success){
+          //save username and password in secure storage for biometrics auth
+          storageService.setEmail(state.email);
+          storageService.setPassword(state.password);
           Navigator.of(context).pop();
         }
         else if(state.status == RegisterStatus.error){
@@ -49,13 +55,18 @@ class AuthFormRegister extends StatelessWidget {
 
 class AuthFormLogin extends StatelessWidget {
 
-  const AuthFormLogin({Key? key}) : super(key: key);
+  AuthFormLogin({Key? key}) : super(key: key);
+
+  final StorageService storageService = StorageService();
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if(state.status == LoginStatus.success){
+          //save username and password securely
+          storageService.setEmail(state.email);
+          storageService.setPassword(state.password);
           Navigator.of(context).pop();
         }
         else if(state.status == LoginStatus.error){

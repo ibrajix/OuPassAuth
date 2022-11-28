@@ -28,7 +28,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  final StorageService storageService = StorageService();
   bool? _checkBiometricsEnabled;
 
   @override
@@ -64,7 +63,7 @@ class _LoginState extends State<Login> {
           child: Column(
             children:  [
               const SizedBox(height: 50),
-              const AuthFormLogin(),
+               AuthFormLogin(),
               _checkBiometricsEnabled == true ? ShowBiometrics() : const SizedBox(height: 10)
             ],
           ),

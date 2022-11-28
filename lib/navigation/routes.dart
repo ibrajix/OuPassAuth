@@ -15,6 +15,7 @@ List<Page> onGenerateAppViewPages(
   if(state == AppStatus.authenticated && emailVerified){
     return [Home.page()];
   }
+
   else if(state == AppStatus.authenticated && !emailVerified){
     return [VerifyEmail.page()];
   }
