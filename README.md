@@ -22,4 +22,4 @@
 
 ## Download (APK)
 
-<a href="https://github.com/ibrajix/OuPassAuth/releases/download/v1.0/our-pass-auth.apk">Click to download</a>
+<a href="https://github.com/ibrajix/OuPassAuth/releases/download/v1.1/app-release.apk">Click to download</a>
