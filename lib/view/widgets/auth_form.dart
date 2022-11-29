@@ -64,11 +64,14 @@ class AuthFormLogin extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if(state.status == LoginStatus.success){
-          //save username and password securely
-          storageService.setEmail(state.email);
-          storageService.setPassword(state.password);
+          if(!state.loggedInWithBiometrics!){
+            //save username and password securely
+            storageService.setEmail(state.email);
+            storageService.setPassword(state.password);
+          }
           Navigator.of(context).pop();
         }
+
         else if(state.status == LoginStatus.error){
           //show error here
           Utility.showSnackBar(context, state.errorMessage ?? Strings.genericErrorMessage);

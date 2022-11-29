@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
             children:  [
               const SizedBox(height: 50),
                AuthFormLogin(),
-              _checkBiometricsEnabled == true ? ShowBiometrics() : const SizedBox(height: 10)
+              _checkBiometricsEnabled == true ? const ShowBiometrics() : const SizedBox(height: 10)
             ],
           ),
         ),

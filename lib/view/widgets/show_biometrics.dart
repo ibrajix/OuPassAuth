@@ -14,7 +14,7 @@ import '../../core/storage/storage_service.dart';
 
 class ShowBiometrics extends StatefulWidget {
 
-  ShowBiometrics({Key? key}) : super(key: key);
+  const ShowBiometrics({Key? key}) : super(key: key);
   @override
   State<ShowBiometrics> createState() => _ShowBiometricsState();
 
@@ -22,20 +22,14 @@ class ShowBiometrics extends StatefulWidget {
 
 class _ShowBiometricsState extends State<ShowBiometrics> {
 
-  final StorageService storageService = StorageService();
-  String? _savedSecureEmail = "";
-  String? _savedSecurePassword = "";
 
-  @override
-  void initState() {
-    super.initState();
-    fetchSecuredStorageData();
+ @override
+  void didChangeDependencies() {
+    final LoginCubit loginCubit = BlocProvider.of<LoginCubit>(context);
+    loginCubit.getSavedAuthDetails();
+    super.didChangeDependencies();
   }
 
-  Future<void> fetchSecuredStorageData() async {
-    _savedSecureEmail = await storageService.getEmail();
-    _savedSecurePassword = await storageService.getPassword();
-  }
 
   @override
   Widget build(BuildContext context, [bool mounted = true]) {
@@ -50,10 +44,12 @@ class _ShowBiometricsState extends State<ShowBiometrics> {
                 if (isAuthenticated) {
                   //pass the saved email and password to firebase and log user in
                   //ideally, the saved email and password in secure storage is to be used to login the user with firebase
-                  debugPrint('checkEmail: $_savedSecureEmail');
+                  final savedSecureEmail = state.savedSecureEmail;
+                  final savedSecurePassword = state.savedSecurePassword;
+                  debugPrint('checkEmail: $savedSecureEmail');
                   //show a snackBar until I fix this
                   if (!mounted) return;
-                  context.read<LoginCubit>().loginWithCredentialsBio(_savedSecureEmail, _savedSecurePassword);
+                  context.read<LoginCubit>().loginWithCredentialsBio(savedSecureEmail, savedSecurePassword);
                 }
               },
               child: Image.asset(
