@@ -18,7 +18,7 @@
 - Secure Storage
 - SharedPreference
 - Model -> Repository -> State Management -> View  
-- Biometrics Auth (Not supported by firebase --> Hack!)
+- Biometrics Auth
 
 ## Download (APK)
 
